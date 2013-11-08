@@ -60,128 +60,155 @@ public class NumbersInWords {
 				String numS = Integer.toString(num);
 				int numDigitos = numS.length();
 				if (numDigitos == 4) {
-					int milhares = Integer.parseInt(Integer.toString(num).substring(0, 1));	
-					int centenas = Integer.parseInt(Integer.toString(num).substring(1, 4));
-					if (milhares == 1) {
-						if (centenas <= 100) {
-							return "mil e " + NumberToWords(centenas);
-						}						
-						return "mil " + NumberToWords(centenas);
-					}else {
-						if (centenas <= 100) {
-							return NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
-						}
-						return NumberToWords(milhares) + " mil " + NumberToWords(centenas);
-					}						
+					return milhar(num);
 				}else if (numDigitos == 5) {
-					int milhares = Integer.parseInt(Integer.toString(num).substring(0, 2));	
-					int centenas = Integer.parseInt(Integer.toString(num).substring(2, 5));
-					if (centenas == 0) {
-						return NumberToWords(milhares) + " mil";
-					}else if (centenas <= 100) {
-						return NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
-					}					
-					return NumberToWords(milhares) + " mil " + NumberToWords(centenas);						
+					return dezenaDeMilhar(num);
 				}else if (numDigitos == 6) {
-					int milhares = Integer.parseInt(Integer.toString(num).substring(0, 3));	
-					int centenas = Integer.parseInt(Integer.toString(num).substring(3, 6));
-					if (centenas == 0) {
-						return NumberToWords(milhares) + " mil";
-					}else if (centenas <= 100) {
-						return NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
-					}					
-					return NumberToWords(milhares) + " mil " + NumberToWords(centenas);
+					return centenaDeMilhar(num);
 				}else if (numDigitos == 7) {
-					int milhoes = Integer.parseInt(Integer.toString(num).substring(0, 1));	
-					int milhares = Integer.parseInt(Integer.toString(num).substring(1, 4));	
-					int centenas = Integer.parseInt(Integer.toString(num).substring(4, 7));
-					String milhoess;
-					if (milhoes > 1) {
-						milhoess = " milhões ";
-					}else {
-						milhoess = " milhão ";
-					}
-					if (centenas == 0 && milhares == 0) {
-						return NumberToWords(milhoes) + " milhões";
-					}else if (milhares == 0) {
-						if (centenas <= 100) {
-							return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(centenas);
-						}						
-						return NumberToWords(milhoes) + milhoess + NumberToWords(centenas);
-					}else if (centenas == 0) {
-						if (milhares < 100) {
-							return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(milhares) + " mil";
-						}
-						return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil";
-					}else {
-						if (centenas <= 100) {
-							return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
-						}						
-						return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil " + NumberToWords(centenas);
-					}	
+					return milhoes(num);
 				}else if(numDigitos == 8) {
-					int milhoes = Integer.parseInt(Integer.toString(num).substring(0, 2));	
-					int milhares = Integer.parseInt(Integer.toString(num).substring(2, 5));	
-					int centenas = Integer.parseInt(Integer.toString(num).substring(5, 8));
-					String milhoess;
-					if (milhoes > 1) {
-						milhoess = " milhões ";
-					}else {
-						milhoess = " milhão ";
-					}
-					if (centenas == 0 && milhares == 0) {
-						return NumberToWords(milhoes) + " milhões";
-					}else if (milhares == 0) {
-						if (centenas <= 100) {
-							return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(centenas);
-						}						
-						return NumberToWords(milhoes) + milhoess + NumberToWords(centenas);
-					}else if (centenas == 0) {
-						if (milhares < 100) {
-							return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(milhares) + " mil";
-						}
-						return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil";
-					}else {
-						if (centenas <= 100) {
-							return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
-						}						
-						return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil " + NumberToWords(centenas);
-					}		
+					return dezenasDemilhoes(num);		
 				}else if (numDigitos == 9) {
-					int milhoes = Integer.parseInt(Integer.toString(num).substring(0, 3));	
-					int milhares = Integer.parseInt(Integer.toString(num).substring(3, 6));	
-					int centenas = Integer.parseInt(Integer.toString(num).substring(6, 9));
-					String milhoess;
-					if (milhoes > 1) {
-						milhoess = " milhões ";
-					}else {
-						milhoess = " milhão ";
-					}
-					if (centenas == 0 && milhares == 0) {
-						return NumberToWords(milhoes) + " milhões";
-					}else if (milhares == 0) {
-						if (centenas <= 100) {
-							return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(centenas);
-						}						
-						return NumberToWords(milhoes) + milhoess + NumberToWords(centenas);
-					}else if (centenas == 0) {
-						if (milhares < 100) {
-							return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(milhares) + " mil";
-						}
-						return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil";
-					}else {
-						if (centenas <= 100) {
-							return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
-						}						
-						return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil " + NumberToWords(centenas);
-					}	
+					return centenasDemilhoes(num);
 				}				
 			}
 			return "Numero invalido";
 		}
 	}
 	
+	public String milhar(int num) {
+		int milhares = Integer.parseInt(Integer.toString(num).substring(0, 1));	
+		int centenas = Integer.parseInt(Integer.toString(num).substring(1, 4));
+		if (milhares == 1) {
+			if (centenas <= 100) {
+				return "mil e " + NumberToWords(centenas);
+			}						
+			return "mil " + NumberToWords(centenas);
+		}else {
+			if (centenas <= 100) {
+				return NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
+			}
+			return NumberToWords(milhares) + " mil " + NumberToWords(centenas);
+			}		
+	}
+	
+	public String dezenaDeMilhar(int num) {
+		int milhares = Integer.parseInt(Integer.toString(num).substring(0, 2));	
+		int centenas = Integer.parseInt(Integer.toString(num).substring(2, 5));
+		if (centenas == 0) {
+			return NumberToWords(milhares) + " mil";
+		}else if (centenas <= 100) {
+			return NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
+		}					
+		return NumberToWords(milhares) + " mil " + NumberToWords(centenas);			
+	}
+	
+	public String centenaDeMilhar(int num) {
+		int milhares = Integer.parseInt(Integer.toString(num).substring(0, 3));	
+		int centenas = Integer.parseInt(Integer.toString(num).substring(3, 6));
+		if (centenas == 0) {
+			return NumberToWords(milhares) + " mil";
+		}else if (centenas <= 100) {
+			return NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
+		}					
+		return NumberToWords(milhares) + " mil " + NumberToWords(centenas);		
+	}
+		
+	public String milhoes(int num) {
+		int milhoes = Integer.parseInt(Integer.toString(num).substring(0, 1));	
+		int milhares = Integer.parseInt(Integer.toString(num).substring(1, 4));	
+		int centenas = Integer.parseInt(Integer.toString(num).substring(4, 7));
+		String milhoess;
+		if (milhoes > 1) {
+			milhoess = " milhões ";
+		}else {
+			milhoess = " milhão ";
+		}
+		if (centenas == 0 && milhares == 0) {
+			return NumberToWords(milhoes) + " milhões";
+		}else if (milhares == 0) {
+			if (centenas <= 100) {
+				return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(centenas);
+			}						
+			return NumberToWords(milhoes) + milhoess + NumberToWords(centenas);
+		}else if (centenas == 0) {
+			if (milhares < 100) {
+				return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(milhares) + " mil";
+			}
+			return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil";
+		}else {
+			if (centenas <= 100) {
+				return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
+			}						
+			return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil " + NumberToWords(centenas);
+		}
+	}
+	
+	public String dezenasDemilhoes(int num) {
+		int milhoes = Integer.parseInt(Integer.toString(num).substring(0, 2));	
+		int milhares = Integer.parseInt(Integer.toString(num).substring(2, 5));	
+		int centenas = Integer.parseInt(Integer.toString(num).substring(5, 8));
+		String milhoess;
+		if (milhoes > 1) {
+			milhoess = " milhões ";
+		}else {
+			milhoess = " milhão ";
+		}
+		if (centenas == 0 && milhares == 0) {
+			return NumberToWords(milhoes) + " milhões";
+		}else if (milhares == 0) {
+			if (centenas <= 100) {
+				return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(centenas);
+			}						
+			return NumberToWords(milhoes) + milhoess + NumberToWords(centenas);
+		}else if (centenas == 0) {
+			if (milhares < 100) {
+				return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(milhares) + " mil";
+			}
+			return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil";
+		}else {
+			if (centenas <= 100) {
+				return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
+			}						
+			return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil " + NumberToWords(centenas);
+		}
+	}
+	
+	public String centenasDemilhoes(int num) {
+		int milhoes = Integer.parseInt(Integer.toString(num).substring(0, 3));	
+		int milhares = Integer.parseInt(Integer.toString(num).substring(3, 6));	
+		int centenas = Integer.parseInt(Integer.toString(num).substring(6, 9));
+		String milhoess;
+		if (milhoes > 1) {
+			milhoess = " milhões ";
+		}else {
+			milhoess = " milhão ";
+		}
+		if (centenas == 0 && milhares == 0) {
+			return NumberToWords(milhoes) + " milhões";
+		}else if (milhares == 0) {
+			if (centenas <= 100) {
+				return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(centenas);
+			}						
+			return NumberToWords(milhoes) + milhoess + NumberToWords(centenas);
+		}else if (centenas == 0) {
+			if (milhares < 100) {
+				return NumberToWords(milhoes) + milhoess + "e " + NumberToWords(milhares) + " mil";
+			}
+			return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil";
+		}else {
+			if (centenas <= 100) {
+				return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil e " + NumberToWords(centenas);
+			}						
+			return NumberToWords(milhoes) + milhoess + NumberToWords(milhares) + " mil " + NumberToWords(centenas);
+		}
+	}
+	
+		
 	/**
+	 * Interface via linha de comando.
+	 * 
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -198,6 +225,5 @@ public class NumbersInWords {
                 System.out.println("\nVocê deve informar um número no intervalo de 0 a 1000000000!\n");
             }
 		}
-		//System.out.println(numberToWords.NumberToWords(100100));
 	}
 }
